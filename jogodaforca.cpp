@@ -51,7 +51,64 @@ void imprime_cabecalho() {
     cout << endl;
 }
 
+vector<string> ler_arquivo() {
+    ifstream arquivo;
+    arquivo.open("C:/Users/eduardo.macedo/.vscode/Desktop/C_C++_-_Alura/jogodaforca/jogodaforca/palavras.txt");
+    if (arquivo.is_open()) {
+        int qtd_palavras;
+        arquivo >> qtd_palavras;
+        vector<string> palavras_do_arquivo;
+
+        //cout << "O arquivo possui: " << qtd_palavras << " palavras." << endl;
+
+        for (int i = 1; i <= qtd_palavras; i++) {
+            string palavra_lida;
+            arquivo >> palavra_lida;
+            palavras_do_arquivo.push_back(palavra_lida);
+            //cout << "Na linha: " << i << " | " << palavra_lida << endl;
+        }
+        arquivo.close(); // Boa prática. Sempre fechar o arquivo quando abrir.
+        return palavras_do_arquivo;
+    }
+    else {
+        cout << "Nao foi possivel acessar o banco de palavras.";
+        exit(0); // Comando que usamos para parar o arquivo no momento da condicional.
+    }
+}
+
+void salvar_arquivo(vector<string> nova_lista) {
+    ofstream arquivo;
+    arquivo.open("C:/Users/eduardo.macedo/.vscode/Desktop/C_C++_-_Alura/jogodaforca/jogodaforca/palavras.txt");
+
+    if (arquivo.is_open()) {
+        arquivo << nova_lista.size() << endl; // Aqui eu escrevo no arquivo a quantidade de palavras.
+
+        for (string palavra : nova_lista) {
+            arquivo << palavra << endl;
+        }
+
+        cout << "A palavra foi salva com sucesso !" << endl;
+        arquivo.close();
+    }
+    else {
+        cout << "Nao foi possivel acessar o banco de palavras" << endl;
+        exit(0);
+    }
+}
+
+void adicionar_palavra() {
+    string nova_palavra;
+    cout << "Digite a palavra que voce deseja adicionar: ";
+    cin >> nova_palavra;
+
+    vector<string> lista_palavras = ler_arquivo();
+    lista_palavras.push_back(nova_palavra);
+
+    salvar_arquivo(lista_palavras);
+}
+
 void imprime_rodape() {
+    int cond_nova_palavra;
     cout << "Fim de jogo !" << endl;
     cout << "A palavra secreta era: " << palavra_secreta << endl;
     if (nao_acertou()) {
@@ -59,6 +116,13 @@ void imprime_rodape() {
     }
     else {
         cout << "Parabens, voce acertou a palavra secreta.";
+        cout << "Voce deseja adicionar uma nova palavra ao banco de palavras ?" << endl;
+        cout << "1 - Sim" << endl;
+        cout << "2 - Nao" << endl;
+        cout << "Opcao: ";cin >> cond_nova_palavra;
+        if (cond_nova_palavra = 1) {
+            adicionar_palavra();
+        }
     }
 }
 
@@ -99,24 +163,7 @@ void chuta() {
     cout << endl;
 }
 
-vector<string> ler_arquivo() {
-    ifstream arquivo;
-    arquivo.open("C:/Users/eduardo.macedo/.vscode/Desktop/C_C++_-_Alura/jogodaforca/jogodaforca/palavras.txt");
-    
-    int qtd_palavras;
-    arquivo >> qtd_palavras;
-    vector<string> palavras_do_arquivo;
 
-    //cout << "O arquivo possui: " << qtd_palavras << " palavras." << endl;
-
-    for (int i = 1; i <= qtd_palavras; i++) {
-        string palavra_lida;
-        arquivo >> palavra_lida;
-        palavras_do_arquivo.push_back(palavra_lida);
-        //cout << "Na linha: " << i << " | " << palavra_lida << endl;
-    }
-    return palavras_do_arquivo;
-}
 
 void sorteia_palavras() {
     vector<string> palavras = ler_arquivo();

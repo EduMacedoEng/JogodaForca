@@ -1,4 +1,0 @@
-﻿  jogodaforca.cpp
-C:\Users\eduardo.macedo\.vscode\Desktop\C C++ - Alura\jogodaforca\jogodaforca\jogodaforca.cpp(15,23): warning C4018: '<': incompatibilidade de signed/unsigned
-C:\Users\eduardo.macedo\.vscode\Desktop\C C++ - Alura\jogodaforca\jogodaforca\jogodaforca.cpp(124,15): warning C4244: 'argumento': conversão de 'time_t' para 'unsigned int', possível perda de dados
-  jogodaforca.vcxproj -> C:\Users\eduardo.macedo\.vscode\Desktop\C C++ - Alura\jogodaforca\Debug\jogodaforca.exe
